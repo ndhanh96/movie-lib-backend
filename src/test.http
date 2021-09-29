@@ -1,0 +1,10 @@
+POST http://localhost:3001/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "so1",
+    "password": "so2"
+}
+
+###
+GET http://localhost:3000/loginsuccess HTTP/1.1

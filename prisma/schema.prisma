@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Items {
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt
+  movieid    Int
+  userID     Int      @db.UnsignedInt
+  name       String?  @default("") @db.Char(255)
+  format     String?  @default("") @db.Char(255)
+  dt_created DateTime @default(now()) @db.Timestamp(0)
+  users      Users    @relation(fields: [userID], references: [id], onDelete: Cascade, map: "User")
+
+  @@index([userID], map: "userID")
+}
+
+model Users {
+  id       Int     @id @default(autoincrement()) @db.UnsignedInt
+  username String  @unique(map: "username") @default("") @db.VarChar(255)
+  password String  @default("") @db.VarChar(255)
+  name     String  @default("") @db.VarChar(255)
+  items    Items[]
+}
