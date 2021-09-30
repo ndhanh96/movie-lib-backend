@@ -54,7 +54,7 @@ passport.deserializeUser(function (user, cb) {
 
 
 const app = express();
-app.use(cors({ origin: 'https://demo-store-fe.herokuapp.com', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
