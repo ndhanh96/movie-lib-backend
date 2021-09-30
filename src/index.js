@@ -184,6 +184,8 @@ app.get('/loginfail', (req, res) => {
   res.json({ isLogin: false });
 });
 
-app.listen(3001, () => {
-  console.log(`Example app listening at http://localhost:3001`);
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+  console.log(`Example app listening at port ${port}`);
 });
