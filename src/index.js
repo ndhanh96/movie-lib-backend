@@ -53,7 +53,7 @@ passport.deserializeUser(function (user, cb) {
 });
 
 const app = express();
-app.use(cors({ origin: 'https://master.d2sny43sfbl9fq.amplifyapp.com', credentials: true }));
+app.use(cors({ origin: 'https://master.d2sny43sfbl9fq.amplifyapp.com/', credentials: true }));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
@@ -184,7 +184,7 @@ app.get('/loginfail', (req, res) => {
   res.json({ isLogin: false });
 });
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 app.listen(port, () => {
   console.log(`Example app listening at port ${port}`);
