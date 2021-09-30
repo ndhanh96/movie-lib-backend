@@ -52,6 +52,7 @@ passport.deserializeUser(function (user, cb) {
   });
 });
 
+
 const app = express();
 app.use(cors({ origin: 'https://demo-store-fe.herokuapp.com', credentials: true }));
 app.use(express.json()); // for parsing application/json
