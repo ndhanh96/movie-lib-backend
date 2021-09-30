@@ -60,16 +60,14 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use(cookieParser());
 app.use(
   require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    proxy: true,
-    cookie:{secure:true}
+    secret: process.env.SESSION_SECRET || 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
   })
 );
 
 app.use(passport.initialize());
-app.use(passport.authenticate('session',{session:true}));
+app.use(passport.authenticate('session'));
 
 app.get('/', (req, res) => {
   res.send(`Hello ${req.user ? req.user.username : 'World'}`);
