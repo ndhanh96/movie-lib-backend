@@ -61,13 +61,13 @@ app.use(cookieParser());
 app.use(
   require('express-session')({
     secret: process.env.SESSION_SECRET || 'keyboard cat',
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
 app.use(passport.initialize());
-app.use(passport.authenticate('session'));
+app.use(passport.authenticate('session',{session:false}));
 
 app.get('/', (req, res) => {
   res.send(`Hello ${req.user ? req.user.username : 'World'}`);
