@@ -69,7 +69,7 @@ app.use(
 );
 
 app.use(passport.initialize());
-app.use(passport.authenticate('session'));
+app.use(passport.authenticate('session',{session:true}));
 
 app.get('/', (req, res) => {
   res.send(`Hello ${req.user ? req.user.username : 'World'}`);
