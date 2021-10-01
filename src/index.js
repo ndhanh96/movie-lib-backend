@@ -61,8 +61,12 @@ app.use(cookieParser());
 app.use(
   require('express-session')({
     secret: process.env.SESSION_SECRET || 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
+    proxy:true,
+    cookie:{
+      sameSite:'none'
+    }
   })
 );
 
@@ -166,8 +170,8 @@ app.post('/addshow', checkShowInDB, async (req, res) => {
   }
 });
 
-app.get('/login', function (req, res, next) {
-  if (req.user) {
+app.get('/login', async function (req, res, next) {
+  if (await req.user) {
     console.log('log in');
     res.json({ ...req.user, isLogin: true });
   } else {
