@@ -54,24 +54,20 @@ passport.deserializeUser(function (user, cb) {
 
 
 const app = express();
-app.use(cors({ origin: 'https://master.d2sny43sfbl9fq.amplifyapp.com', credentials: true }));
+app.use(cors({ origin: true, allowedHeaders:['X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'] , credentials: true }));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 app.use(
   require('express-session')({
-    secret: process.env.SESSION_SECRET || 'keyboard cat',
+    secret: 'keyboard cat',
     resave: true,
     saveUninitialized: false,
-    proxy:true,
-    cookie:{
-      sameSite:'none'
-    }
   })
 );
 
 app.use(passport.initialize());
-app.use(passport.authenticate('session',{session:false}));
+app.use(passport.authenticate('session'));
 
 app.get('/', (req, res) => {
   res.send(`Hello ${req.user ? req.user.username : 'World'}`);
