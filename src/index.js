@@ -55,7 +55,7 @@ passport.deserializeUser(function (user, cb) {
 
 const app = express();
 app.enable('trust proxy')
-app.use(cors({ origin: true, allowedHeaders:['X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'] , credentials: true }));
+app.use(cors({ origin: 'https://master.d2sny43sfbl9fq.amplifyapp.com', credentials: true }));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
