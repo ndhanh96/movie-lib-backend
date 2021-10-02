@@ -54,6 +54,7 @@ passport.deserializeUser(function (user, cb) {
 
 
 const app = express();
+app.enable('trust proxy')
 app.use(cors({ origin: true, allowedHeaders:['X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'] , credentials: true }));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -61,8 +62,12 @@ app.use(cookieParser());
 app.use(
   require('express-session')({
     secret: 'keyboard cat',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
+    cookie: {
+      sameSite:'none',
+      secure:true
+    }
   })
 );
 
